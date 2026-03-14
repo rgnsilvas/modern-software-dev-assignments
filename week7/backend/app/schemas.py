@@ -6,14 +6,24 @@ from pydantic import BaseModel, Field
 class NoteCreate(BaseModel):
     title: str = Field(..., min_length=3, max_length=50)
     content: str = Field(..., min_length=1)
+    category_id: int | None = None
 
 
 class NoteRead(BaseModel):
     id: int
     title: str
     content: str
+    category_id: int | None = None
     created_at: datetime
     updated_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class CategoryRead(BaseModel):
+    id: int
+    name: str
 
     class Config:
         from_attributes = True
