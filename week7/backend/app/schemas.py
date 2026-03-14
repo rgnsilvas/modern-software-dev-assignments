@@ -1,11 +1,11 @@
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class NoteCreate(BaseModel):
-    title: str
-    content: str
+    title: str = Field(..., min_length=3, max_length=50)
+    content: str = Field(..., min_length=1)
 
 
 class NoteRead(BaseModel):
